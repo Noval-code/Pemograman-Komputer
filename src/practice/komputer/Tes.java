@@ -24,11 +24,17 @@ public class Tes {
                     Komputer k = data.searchByBrand(key);
                     data.viewData(k);
                 }
+              
                 case AppInterface.SEARCH_BY_MODEL ->{
                     String key = data.keyword("model");
                     Komputer k = data.searchByModel(key);
                     data.viewData(k);
                 }
+                
+                case AppInterface.VIEW_TABLE_DATA ->{ 
+                    data.viewTableData();
+                }
+                
                 case AppInterface.EXIT ->{
                     data.exit();
                 }

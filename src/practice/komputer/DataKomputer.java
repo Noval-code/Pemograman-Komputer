@@ -5,6 +5,10 @@
 package practice.komputer;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,7 +30,8 @@ public class DataKomputer implements AppInterface{
                 + "1 &rarr; Tambah Data Komputer<br>"
                 + "2 &rarr; Cari berdasarkan Brand Komputer<br>"
                 + "3 &rarr; Cari berdasarkan Model Komputer<br>"
-                + "4 &rarr; Keluar Aplikasi<br>"
+                + "4 &rarr; Lihat seluruh data<br>"
+                + "5 &rarr; Keluar dari aplikasi"
                 + "==================<br>"
                 + "<b>Ketik Pilihan Anda: </b>"
                 + "</html>",
@@ -115,6 +120,39 @@ public class DataKomputer implements AppInterface{
                     "Data Komputer",
                     JOptionPane.QUESTION_MESSAGE);
         }
+    }
+    @Override
+    public void viewTableData(){
+         
+         
+           DefaultTableModel model = new DefaultTableModel();
+           
+           // Menambahkan kolom ke model
+           model.addColumn("Brand");
+           model.addColumn("Model");
+           model.addColumn("Disk");
+           model.addColumn("Disk Size");
+           model.addColumn("RAM");
+
+           // Menambahkan baris ke model
+            for (Komputer k : komputer) {
+                if (k != null) {
+                model.addRow(new Object[]{k.getBrand(), k.getModel(), k.getDisk(), k.getDiskSize(), k.getRam()});
+                }
+            }
+           
+           JTable table = new JTable(model);
+
+        // Membuat JScrollPane agar bisa menggulung tabel jika perlu
+          JScrollPane scrollPane = new JScrollPane(table);
+
+        // Membuat panel untuk menampung JTable
+          JPanel panel = new JPanel();
+          panel.add(scrollPane);
+
+        // Menampilkan dialog JOptionPane dengan panel yang berisi JTable
+           JOptionPane.showMessageDialog(null, panel, "Data Table", JOptionPane.PLAIN_MESSAGE);
+    
     }
 
     @Override
